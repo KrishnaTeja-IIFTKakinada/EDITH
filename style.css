@@ -1,0 +1,169 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #080d1c, #111c35);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 18px;
+}
+
+.container,
+#subject-screen,
+#mock-screen {
+    width: 100%;
+    max-width: 680px;
+    padding: 45px 35px;
+    background: rgba(24, 37, 65, 0.85);
+    border: 1px solid rgba(100, 160, 255, 0.15);
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+h1 {
+    font-size: 58px;
+    letter-spacing: 8px;
+    color: #55c7ff;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: 25px;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+p {
+    color: #aabbd5;
+    font-size: 16px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.menu button,
+button {
+    width: 100%;
+    padding: 17px 22px;
+    background: #172947;
+    color: #ffffff;
+    border: 1px solid #31517e;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.menu button:hover,
+button:hover {
+    background: #2364ad;
+    border-color: #55c7ff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(35, 100, 173, 0.3);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#subject-screen,
+#mock-screen {
+    line-height: 1.6;
+}
+
+#subject-screen > button,
+#mock-screen > button {
+    margin-top: 25px;
+    background: transparent;
+    border-color: #52749e;
+    color: #a9c7ed;
+}
+
+#subject-screen > button:hover,
+#mock-screen > button:hover {
+    background: #172947;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .container,
+    #subject-screen,
+    #mock-screen {
+        padding: 32px 20px;
+    }
+
+    h1 {
+        font-size: 44px;
+    }
+
+    h2 {
+        font-size: 21px;
+    }
+}
+
+/* EDITH - Question Manager Form Styling */
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 8px 0 18px;
+    background: #0d1930;
+    color: #ffffff;
+    border: 1px solid #34527c;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #55c7ff;
+    box-shadow: 0 0 0 3px rgba(85, 199, 255, 0.15);
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #7186a5;
+}
+
+select option {
+    background: #0d1930;
+    color: #ffffff;
+}
+
+label {
+    display: block;
+    color: #b9d8f5;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 8px;
+}
+

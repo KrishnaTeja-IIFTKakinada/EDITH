@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDITH - IPMAT AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HOME PAGE -->
+    <div class="container" id="home-screen">
+        <div class="home-header">
+            <h1>EDITH</h1>
+            <button class="settings-button" onclick="openSettings()">&#9881; Settings</button>
+        </div>
+        <p>Your Intelligent IPMAT Practice Companion</p>
+        <div class="menu">
+            <h2>Choose Your Practice Mode</h2>
+            <button onclick="openSection('Verified Practice')">Verified Practice</button>
+            <button onclick="openSection('AI Practice')">AI Practice</button>
+            <button onclick="openSection('Mock Tests')">Mock Tests</button>
+        </div>
+    </div>
+
+    <!-- SUBJECT SELECTION -->
+    <div class="container" id="subject-screen" style="display:none;">
+        <h2 id="mode-title">Choose Your Subject</h2>
+        <div class="menu">
+            <button onclick="openChapters('Quantitative Aptitude')">Quantitative Aptitude (QA)</button>
+            <button onclick="openChapters('Verbal Ability')">Verbal Ability (VA)</button>
+            <button onclick="openChapters('Reading Comprehension')">Reading Comprehension (RC)</button>
+            <button onclick="openChapters('Logical Reasoning')">Logical Reasoning (LR)</button>
+            <button onclick="openChapters('Data Interpretation and Logical Reasoning')">Data Interpretation and Logical Reasoning (DILR)</button>
+        </div>
+        <button class="back-button" onclick="goHome()">Back to Home</button>
+    </div>
+
+    <!-- CHAPTER SELECTION -->
+    <div class="container" id="chapter-screen" style="display:none;">
+        <h2 id="chapter-heading">Choose a Chapter</h2>
+        <p>Select a chapter to continue.</p>
+        <div class="menu" id="chapter-list"></div>
+        <button class="back-button" onclick="backToSubjects()">Back to Subjects</button>
+    </div>
+
+    <!-- TOPIC SELECTION -->
+    <div class="container" id="topic-screen" style="display:none;">
+        <h2 id="topic-heading">Choose a Topic</h2>
+        <p>Select a topic to continue.</p>
+        <div class="menu" id="topic-list"></div>
+        <button class="back-button" onclick="backToChapters()">Back to Chapters</button>
+    </div>
+
+    <!-- READING COMPREHENSION SCREEN -->
+    <div class="container" id="rc-screen" style="display:none;">
+        <h2>Reading Comprehension</h2>
+        <p>Practice passage-based questions.</p>
+        <button onclick="openRCPractice()">Start RC Practice</button>
+        <button class="back-button" onclick="backToSubjects()">Back to Subjects</button>
+    </div>
+
+    <!-- PRACTICE SCREEN -->
+    <div class="container" id="practice-screen" style="display:none;">
+
+        <h2 id="practice-heading">EDITH Practice</h2>
+
+        <div class="practice-info">
+            <p id="practice-category"></p>
+            <p id="question-progress">Question 0 of 0</p>
+            <p id="practice-score">Score: 0</p>
+        </div>
+
+        <div class="practice-progress">
+            <div id="practice-progress-bar"></div>
+        </div>
+
+        <div id="practice-question-area">
+            <h3 id="practice-question">Question will appear here.</h3>
+
+            <div class="practice-options" id="practice-options">
+
+                <button type="button" class="answer-option" data-option="A"
+                    onclick="selectPracticeAnswer('A')">
+                    A. Option A
+                </button>
+
+                <button type="button" class="answer-option" data-option="B"
+                    onclick="selectPracticeAnswer('B')">
+                    B. Option B
+                </button>
+
+                <button type="button" class="answer-option" data-option="C"
+                    onclick="selectPracticeAnswer('C')">
+                    C. Option C
+                </button>
+
+                <button type="button" class="answer-option" data-option="D"
+                    onclick="selectPracticeAnswer('D')">
+                    D. Option D
+                </button>
+
+            </div>
+
+            <button id="submit-practice-answer"
+                onclick="submitPracticeAnswer()">
+                Submit Answer
+            </button>
+
+            <div id="practice-feedback" role="status"></div>
+
+            <button id="next-practice-question"
+                onclick="nextPracticeQuestion()"
+                style="display:none;">
+                Next Question
+            </button>
+        </div>
+
+        <div id="practice-result" style="display:none;">
+            <h2>Practice Completed!</h2>
+            <h3 id="final-practice-score"></h3>
+            <p id="final-practice-message"></p>
+            <button onclick="restartPractice()">Practice Again</button>
+            <button onclick="goHome()">Back to Home</button>
+        </div>
+
+        <button class="back-button" onclick="exitPractice()">
+            Exit Practice
+        </button>
+
+    </div>
+
+    <!-- MOCK TEST SCREEN -->
+    <div class="container" id="mock-screen" style="display:none;">
+        <h2>EDITH Mock Tests</h2>
+        <p>Select a subject for your mock test.</p>
+        <div class="menu">
+            <button onclick="startMock('Quantitative Aptitude')">Quantitative Aptitude Mock</button>
+            <button onclick="startMock('Verbal Ability')">Verbal Ability Mock</button>
+            <button onclick="startMock('Reading Comprehension')">Reading Comprehension Mock</button>
+            <button onclick="startMock('Logical Reasoning')">Logical Reasoning Mock</button>
+            <button onclick="startMock('Data Interpretation and Logical Reasoning')">DILR Mock</button>
+        </div>
+        <button class="back-button" onclick="goHome()">Back to Home</button>
+    </div>
+
+    <!-- SETTINGS SCREEN -->
+    <div class="container" id="settings-screen" style="display:none;">
+        <h2>EDITH Settings</h2>
+        <p>Administrator access</p>
+        <div class="menu">
+            <button onclick="openAdminLogin()">Question Manager</button>
+        </div>
+        <button class="back-button" onclick="goHome()">Back to Home</button>
+    </div>
+
+    <!-- ADMIN LOGIN SCREEN -->
+    <div class="container" id="admin-login-screen" style="display:none;">
+        <h2>Administrator Login</h2>
+        <p>Enter your Admin PIN to continue.</p>
+        <input type="password" id="admin-pin" placeholder="Enter Admin PIN" class="admin-input">
+        <div class="menu">
+            <button onclick="verifyAdmin()">Unlock Question Manager</button>
+        </div>
+        <button class="back-button" onclick="openSettings()">Back</button>
+    </div>
+
+    <!-- QUESTION MANAGER SCREEN -->
+    <div class="container" id="question-manager-screen" style="display:none;">
+        <h2>Question Manager</h2>
+        <p>Add questions to your EDITH question bank.</p>
+
+        <div class="menu">
+            <h3>AI Question Generator</h3>
+            <p>Tell EDITH what kind of IPMAT question you want.</p>
+
+            <label for="ai-question-prompt">AI Instructions</label>
+            <textarea id="ai-question-prompt" rows="4" placeholder="Describe the question you want EDITH to generate."></textarea>
+
+            <button type="button" onclick="generateAIQuestion()">Generate Question with AI</button>
+            <p id="ai-generation-status" role="status"></p>
+
+            <hr>
+
+            <h3>Question Details</h3>
+            <p>Review the generated question before saving it.</p>
+
+            <label for="question-mode">Practice Mode</label>
+            <select id="question-mode">
+                <option value="Verified Practice">Verified Practice</option>
+                <option value="AI Practice">AI Practice</option>
+            </select>
+
+            <label for="question-subject">Subject</label>
+            <select id="question-subject">
+                <option value="Quantitative Aptitude">Quantitative Aptitude</option>
+                <option value="Verbal Ability">Verbal Ability</option>
+                <option value="Reading Comprehension">Reading Comprehension</option>
+                <option value="Logical Reasoning">Logical Reasoning</option>
+                <option value="Data Interpretation and Logical Reasoning">Data Interpretation and Logical Reasoning</option>
+            </select>
+
+            <label for="question-chapter">Chapter</label>
+            <select id="question-chapter">
+                <option value="Arithmetic">Arithmetic</option>
+            </select>
+
+            <label for="question-topic">Topic</label>
+            <input type="text" id="question-topic" placeholder="Enter topic name">
+
+            <label for="question-text">Question</label>
+            <textarea id="question-text" rows="4" placeholder="Enter your question"></textarea>
+
+            <label for="option-a">Option A</label>
+            <input type="text" id="option-a" placeholder="Enter option A">
+
+            <label for="option-b">Option B</label>
+            <input type="text" id="option-b" placeholder="Enter option B">
+
+            <label for="option-c">Option C</label>
+            <input type="text" id="option-c" placeholder="Enter option C">
+
+            <label for="option-d">Option D</label>
+            <input type="text" id="option-d" placeholder="Enter option D">
+
+            <label for="correct-answer">Correct Answer</label>
+            <select id="correct-answer">
+                <option value="">Select correct answer</option>
+                <option value="A">Option A</option>
+                <option value="B">Option B</option>
+                <option value="C">Option C</option>
+                <option value="D">Option D</option>
+            </select>
+
+            <label for="question-explanation">Explanation</label>
+            <textarea id="question-explanation" rows="5" placeholder="Enter the detailed explanation"></textarea>
+
+            <button type="button" onclick="saveQuestion()">Save Question</button>
+        </div>
+
+        <button class="back-button" onclick="openSettings()">Back to Settings</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
